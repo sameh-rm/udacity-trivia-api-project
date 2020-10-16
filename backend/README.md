@@ -6,7 +6,7 @@
 
 #### Python 3.7
 
-- [ ]
+- [ ] 
 - [ ] Virtual Enviornment
 
 We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
@@ -128,11 +128,11 @@ GET '/categories'
            "success": true ,
            "categories":[
                          {"id":1 , "type": "Science", "image_link":"URL"},
-                         {"id":2 : "type": "Art", "image_link":"URL"},
-                         {"id":3 : "type": "Geography", "image_link":"URL"},
-                         {"id":4 : "type": "History", "image_link":"URL"},
-                         {"id":5 : "type": "Entertainment", "image_link":"URL"},
-                         {"id":6 : "type": "Sports", "image_link":"URL"}
+                         {"id":2 , "type": "Art", "image_link":"URL"},
+                         {"id":3 , "type": "Geography", "image_link":"URL"},
+                         {"id":4 , "type": "History", "image_link":"URL"},
+                         {"id":5 , "type": "Entertainment", "image_link":"URL"},
+                         {"id":6 , "type": "Sports", "image_link":"URL"}
            ]
            "total_categories": 6
 }
@@ -156,7 +156,7 @@ POST '/categories'
                  "image_link": "some_url",
 }
 - Returns:{
-            "success": True,
+            "success": true,
             "category": {
                            "id":1 ,
                            "type": "Science",
@@ -432,3 +432,4 @@ createdb trivia_test
 psql trivia_test < trivia.psql
 python test_flaskr.py
 ```
+
