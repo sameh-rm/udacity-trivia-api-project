@@ -112,7 +112,7 @@ POST '/users/login'
 }
 
 POST '/users'
-- Requires A jwt-token ["xx-auth-token" Header]
+- Requires A jwt-token ["xx-auth-token" "Header"]
 - Returns:{
            "username": "username",
 }
@@ -127,7 +127,7 @@ GET '/categories'
 - Returns:{
            "success": true ,
            "categories":[
-                         {"id":1 , type": "Science", "image_link":"URL"},
+                         {"id":1 , "type": "Science", "image_link":"URL"},
                          {"id":2 : "type": "Art", "image_link":"URL"},
                          {"id":3 : "type": "Geography", "image_link":"URL"},
                          {"id":4 : "type": "History", "image_link":"URL"},
