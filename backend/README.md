@@ -7,8 +7,7 @@
 #### Python 3.7
 
 - [ ]
-
-#### Virtual Enviornment
+- [ ] Virtual Enviornment
 
 We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
@@ -77,21 +76,21 @@ POST '/users/register'
 - Creates A new user
 - Requires username,password
 - Returns:{
-           "token": jwt--"eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
+           "token":"eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
                    .eyJ1oxNjAyODI0NTQyfQ.Qx2enXS508gLCs-PBnRhBFTCYVlOWmpax_YC1G4MZWY",
-           "username": username,
+           "username": "username",
            "message": "user has been created"
 }
 
 GET '/users/quizzes'
 - Fetchs the quizzes of a sepcifec user
-- Requires ["xx-auth-token" Header]
+- Requires ["xx-auth-token", "Header"]
 - Returns:{
-  "quizzes": [//user quizzes list
+  "quizzes": [
     {
-      id:1,
-      result:2,
-      "category": {// category of the quizz
+      "id": 1,
+      "result": 2,
+      "category": {
         "id": 1,
         "image_link": null,
         "type": "Science"
@@ -107,19 +106,16 @@ GET '/users/quizzes'
 POST '/users/login'
 - Requiers A username, password
 - Returns:{
-           "token": jwt--"eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
+           "token": "eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
                    .eyJ1oxNjAyODI0NTQyfQ.Qx2enXS508gLCs-PBnRhBFTCYVlOWmpax_YC1G4MZWY",
-           "username": username
+           "username": "username"
 }
 
 POST '/users'
 - Requires A jwt-token ["xx-auth-token" Header]
 - Returns:{
-           "username": username,
+           "username": "username",
 }
-
-
-
 ```
 
 ### Categories
@@ -129,78 +125,77 @@ GET '/categories'
 - Fetches a list of categories
 - Request Arguments: None
 - Returns:{
-           "success": true // bool,
+           "success": true ,
            "categories":[
-                         {id:'1' , type: "Science", image_link:"URL"},
-                         {id:'2' : type: "Art", image_link:"URL"},
-                         {id:'3' : type: "Geography", image_link:"URL"},
-                         {id:'4' : type: "History", image_link:"URL"},
-                         {id:'5' : type: "Entertainment", image_link:"URL"},
-                         {id:'6' : type: "Sports", image_link:"URL"}
+                         {"id":1 , type": "Science", "image_link":"URL"},
+                         {"id":2 : "type": "Art", "image_link":"URL"},
+                         {"id":3 : "type": "Geography", "image_link":"URL"},
+                         {"id":4 : "type": "History", "image_link":"URL"},
+                         {"id":5 : "type": "Entertainment", "image_link":"URL"},
+                         {"id":6 : "type": "Sports", "image_link":"URL"}
            ]
-           "total_categories": CountOfCategories // int
+           "total_categories": 6
 }
 
 
 GET '/categories/<int:category_id>'
 - Fetches an object contains a Category
-- Request Arguments: category_id // int
+- Request Arguments: category_id
 - Returns:{
-           "success": true // bool,
-           "category":{id:'1' , type: "Science", image_link:"URL"}
+           "success": true ,
+           "category":{"id":1 , "type": "Science", "image_link":"URL"}
 }
 
 
 POST '/categories'
 - Creates a new Category
-- Requiers ["xx-auth-token" Header]
+- Requiers ["xx-auth-token" "Header"]
 - Request Arguments: None
 - Request Body:{
-                 type= "some_type",
-                 image_link="some_url",
+                 "type": "some_type",
+                 "image_link": "some_url",
 }
 - Returns:{
             "success": True,
             "category": {
-                           id:'1' ,
-                           type: "Science",
-                           image_link:"URL"
+                           "id":1 ,
+                           "type": "Science",
+                           "image_link":"URL"
             }
 }
 
 
 PUT '/categories/<int:category_id>'
 - Updates an existed Category
-- Requiers ["xx-auth-token" Header]
+- Requiers ["xx-auth-token" "Header"]
 - Request Arguments: category_id // 1
 - Request Body:{
-                 type= "Development",
-                 image_link= "some_url",
+                 "type": "Development",
+                 "image_link": "some_url",
 }
 - Returns:{
-            "success": True,
+            "success": true,
             "category": {
-                           id:'1' ,
-                           type: "Development",
-                           image_link:"some_url"
+                           "id":'1' ,
+                           "type": "Development",
+                           "image_link":"some_url"
             }
 }
 
 
 DETELE '/categories/<int:category_id>'
 - Deletes an existed Category
-- Requiers ["xx-auth-token" Header]
+- Requiers ["xx-auth-token" "Header"]
 - Request Arguments: category_id // int
 - Request Body: No Body
 - Returns:{
-            "success": True,
-            "category": { // deleted category
-                           id:'1' ,
-                           type: "Science",
-                           image_link:"URL"
+            "success": true,
+            "category": {
+                           "id":'1' ,
+                           "type": "Science",
+                           "image_link":"URL"
             }
 }
-
 ```
 
 ### Questions
