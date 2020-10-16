@@ -82,6 +82,23 @@ POST '/users/register'
            "message": "user has been created"
 }
 
+
+POST '/users/login'
+- Requiers A username, password
+- Returns:{
+           "token": "eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
+                   .eyJ1oxNjAyODI0NTQyfQ.Qx2enXS508gLCs-PBnRhBFTCYVlOWmpax_YC1G4MZWY",
+           "username": "username"
+}
+
+
+POST '/users'
+- Requires A jwt-token ["xx-auth-token" "Header"]
+- Returns:{
+           "username": "username",
+}
+
+
 GET '/users/quizzes'
 - Fetchs the quizzes of a sepcifec user
 - Requires ["xx-auth-token", "Header"]
@@ -103,19 +120,8 @@ GET '/users/quizzes'
   ],
   "success": true
 }
-POST '/users/login'
-- Requiers A username, password
-- Returns:{
-           "token": "eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
-                   .eyJ1oxNjAyODI0NTQyfQ.Qx2enXS508gLCs-PBnRhBFTCYVlOWmpax_YC1G4MZWY",
-           "username": "username"
-}
 
-POST '/users'
-- Requires A jwt-token ["xx-auth-token" "Header"]
-- Returns:{
-           "username": "username",
-}
+
 ```
 
 ### Categories
