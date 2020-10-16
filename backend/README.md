@@ -176,7 +176,7 @@ PUT '/categories/<int:category_id>'
 - Returns:{
             "success": true,
             "category": {
-                           "id":'1' ,
+                           "id":1 ,
                            "type": "Development",
                            "image_link":"some_url"
             }
@@ -191,7 +191,7 @@ DETELE '/categories/<int:category_id>'
 - Returns:{
             "success": true,
             "category": {
-                           "id":'1' ,
+                           "id":1,
                            "type": "Science",
                            "image_link":"URL"
             }
