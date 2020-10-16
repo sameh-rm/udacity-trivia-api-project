@@ -57,7 +57,7 @@ def create_app(test_config=None):
             if not token:
                 return jsonify({"message": "Token is missing"}), 404
             try:
-                data = jwt.decode(token, app.config["SECRET_KEY"])
+                jwt.decode(token, app.config["SECRET_KEY"])
             except:
                 return jsonify({"message": "Token is invalid"}), 403
             return f(*args, **kwargs)
