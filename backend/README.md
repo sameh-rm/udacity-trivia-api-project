@@ -77,7 +77,7 @@ POST '/users/register'
 - Creates A new user
 - Requires username,password
 - Returns:{
-           "token": jwt--"eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
+           "token": - jwt--"eyJ0eXAiOiJKV1QiLCJhbGciqrasfaxzvzvOiJIUqeqeqezI1NiJ9
                    .eyJ1oxNjAyODI0NTQyfQ.Qx2enXS508gLCs-PBnRhBFTCYVlOWmpax_YC1G4MZWY",
            "username": username,
            "message": "user has been created"
