@@ -1,0 +1,77 @@
+.header {
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.App-header {
+	height: 75px;
+	width: 40%;
+	padding: 20px;
+	padding-right: 15%;
+	padding-left: 5%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.login-header {
+	display: flex;
+	justify-content: space-between;
+	position: relative;
+	margin-right: 5rem;
+}
+.App-header > h1 {
+	color: dodgerblue;
+}
+
+.App-intro {
+	font-size: large;
+}
+
+h2 {
+	text-align: center;
+	cursor: pointer;
+}
+
+li {
+	text-align: center;
+	margin: 5px 0px;
+}
+
+ul {
+	list-style-type: none;
+	padding-inline-start: 0px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	margin: auto;
+}
+
+.action-img {
+	cursor: pointer;
+}
+.category-item {
+	margin: auto;
+	width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.category-left:hover {
+	background-color: rgba(180, 180, 180, 0.3);
+	cursor: pointer;
+}
+.category-type {
+	width: 200px;
+}
+.category-left {
+	display: flex;
+	flex-direction: row;
+}
+.category {
+	margin: auto;
+	margin-left: 10px;
+}
