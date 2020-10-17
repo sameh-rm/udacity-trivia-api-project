@@ -55,11 +55,11 @@ def create_app(test_config=None):
         def decorated(*args, **kwargs):
             token = request.headers.get("xx-auth-token")
             if not token:
-                return jsonify({"message": "Token is missing"}), 404
+                return jsonify({"message": "Token is missing", "success": False}), 404
             try:
                 jwt.decode(token, app.config["SECRET_KEY"])
             except:
-                return jsonify({"message": "Token is invalid"}), 403
+                return jsonify({"message": "Token is invalid or expired", "success": False}), 403
             return f(*args, **kwargs)
         return decorated
 
@@ -263,7 +263,7 @@ def create_app(test_config=None):
                     setattr(category, key, body[key])
             category.update()
         except:
-            abort(404, "cannot find this category make sure you passed the correct ID")
+            return jsonify({"message": "cannot find this category make sure you passed the correct ID", "success": False}), 404
 
         return jsonify({
             "success": True,
@@ -301,6 +301,7 @@ def create_app(test_config=None):
             return jsonify({"message": "this username is taken try another one"}), 422
 
     @app.route("/users/quizzes", methods=["GET"])
+    @token_required
     def get_user_quizzes():
         decoded_token = decode_token(request.headers.get("xx-auth-token"))
         user = User.query.filter_by(
@@ -314,33 +315,38 @@ def create_app(test_config=None):
 
     @app.route("/users/login", methods=["POST"])
     def login():
-        body = request.get_json()
-        username = body["username"]
-        password = body["password"]
-        if not username or not password:
-            return jsonify({"message": "could not verify"})
-
-        user = User.query.filter_by(username=username).first()
-
-        if not user:
-            return jsonify({"message": "Invalid credentials"}), 404
-
-        if check_password_hash(user.password, password):
-            # exp = the token life time
-            token = generate_token(user)
-            return jsonify({"token": token.decode("UTF-8"), "username": username}), 200
-
-        return jsonify({"message": "could not verify"}), 403
-
-    @app.route("/users", methods=["POST"])
-    def get_logged_user():
         try:
             body = request.get_json()
-            token = body["token"]
-            token_decoded = decode_token(token)
-            if not token or token_decoded["exp"] < datetime.datetime.utcnow().timestamp():
-                return jsonify({"message": "missing Authentication Token or token is expired"}), 403
+            username = body["username"]
+            password = body["password"]
+            if not username or not password:
+                return jsonify({"message": "could not verify"})
 
+            user = User.query.filter_by(username=username).one_or_none()
+
+            if not user:
+                return jsonify({"message": "Invalid credentials"}), 404
+
+            if check_password_hash(user.password, password):
+                # exp = the token life time
+                token = generate_token(user)
+                return jsonify({"token": token.decode("UTF-8"),
+                                "username": username}), 200
+        except:
+            return jsonify({"message": "username and password required to login"}), 400
+
+        return jsonify({"message": "could not verify, please check your password and try again"}), 422
+
+    @app.route("/users", methods=["GET"])
+    @token_required
+    def get_logged_user():
+        try:
+            token = request.headers.get("xx-auth-token")
+            token_decoded = decode_token(token)
+            if not token:
+                return jsonify({"message": "missing Authentication Token or token is expired"}), 404
+            if token_decoded["exp"] < datetime.datetime.utcnow().timestamp():
+                return jsonify({"message": "Expired Token"}), 400
             user = User.query.filter_by(
                 username=token_decoded["user"]).one_or_none()
             if user:
@@ -349,10 +355,10 @@ def create_app(test_config=None):
                 return jsonify({"message": "Invalid Token"}), 403
         except:
             print(sys.exc_info())
-            abort(403, "Token Expired"), 403
+            return jsonify({"message": "Expired Token"}), 400
 
-    @app.route("/users/quizzes", methods=["POST"])
-    @token_required
+    @ app.route("/users/quizzes", methods=["POST"])
+    @ token_required
     def save_user_quiz_score():
         try:
             body = request.get_json()
@@ -378,7 +384,7 @@ def create_app(test_config=None):
   Create error handlers for all expected errors
   '''
 
-    @app.errorhandler(404)
+    @ app.errorhandler(404)
     def not_found(error):
         return jsonify({
             "success": False,
@@ -386,7 +392,7 @@ def create_app(test_config=None):
             "message": "resource not found"
         }), 404
 
-    @app.errorhandler(422)
+    @ app.errorhandler(422)
     def unprocessable(error):
         return jsonify({
             "success": False,
@@ -394,7 +400,7 @@ def create_app(test_config=None):
             "message": "unprocessable"
         }), 422
 
-    @app.errorhandler(400)
+    @ app.errorhandler(400)
     def bad_request(error):
         return jsonify({
             "success": False,
@@ -402,7 +408,7 @@ def create_app(test_config=None):
             "message": "bad request"
         }), 400
 
-    @app.errorhandler(405)
+    @ app.errorhandler(405)
     def method_not_allowed(error):
         return jsonify({
             "success": False,
@@ -410,7 +416,7 @@ def create_app(test_config=None):
             "message": "Method Not Allowed"
         }), 405
 
-    @app.errorhandler(403)
+    @ app.errorhandler(403)
     def method_forbbiden(error):
         return jsonify({
             "success": False,

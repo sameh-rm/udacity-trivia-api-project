@@ -120,7 +120,7 @@ class QuestionView extends Component {
 					this.getQuestions();
 				},
 				error: (error) => {
-					alert("Unable to load questions. Please try your request again");
+					alert("Unable to delete this category. Please login and try again");
 					return;
 				},
 			});

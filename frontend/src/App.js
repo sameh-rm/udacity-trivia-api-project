@@ -25,12 +25,15 @@ class App extends Component {
 		if (token) {
 			$.ajax({
 				url: `/users`, //TODO: update request URL
-				type: "POST",
+				type: "GET",
 				dataType: "json",
 				contentType: "application/json",
-				data: JSON.stringify({
-					token: token,
-				}),
+				// data: JSON.stringify({
+				// 	token: token,
+				// }),
+				headers: {
+					"xx-auth-token": this.state.token,
+				},
 				xhrFields: {
 					withCredentials: true,
 				},
@@ -44,16 +47,16 @@ class App extends Component {
 					return;
 				},
 				error: (error) => {
-					if (error.status === 403) {
+					if (error.status === 400) {
+						console.log(error);
 						if (this.state.logged) {
-							alert(error.responseJSON.error);
+							alert(error.responseJSON.message);
 						}
 						this.setState({ logged: false, username: "", token: "" });
 						localStorage.removeItem("xx-auth-token");
 						return;
 					}
-
-					alert(error.responseJSON.error);
+					alert(error.responseJSON.message);
 
 					return;
 				},
@@ -93,7 +96,7 @@ class App extends Component {
 				return;
 			},
 			error: (error) => {
-				if (error.status === 403) {
+				if (error.status === 400) {
 					if (this.state.logged) {
 						alert(error.responseJSON.error);
 					}
