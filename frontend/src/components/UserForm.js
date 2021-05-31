@@ -11,7 +11,7 @@ class UserForm extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props.username);
+		// console.log(this.props.username);
 		if (this.props.username) {
 			this.props.history.push("/");
 		}

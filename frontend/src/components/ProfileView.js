@@ -38,7 +38,7 @@ class ProfileView extends Component {
 		});
 	};
 	componentDidMount() {
-		console.log(localStorage.getItem("xx-auth-token"));
+		// console.log(localStorage.getItem("xx-auth-token"));
 		$.ajax({
 			url: `/users/quizzes`, //TODO: update request URL
 			type: "GET",

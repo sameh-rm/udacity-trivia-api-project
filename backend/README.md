@@ -7,7 +7,7 @@
 #### Python 3.7
 
 - [ ]
-- [ ] Virtual Enviornment
+- [x] Virtual Enviornment
 
 We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
@@ -82,7 +82,9 @@ POST '/users/register'
            "message": "user has been created"
 }
 
+```
 
+```
 POST '/users/login'
 - Requiers A username, password
 - Returns:{
@@ -90,15 +92,17 @@ POST '/users/login'
                    .eyJ1oxNjAyODI0NTQyfQ.Qx2enXS508gLCs-PBnRhBFTCYVlOWmpax_YC1G4MZWY",
            "username": "username"
 }
+```
 
-
+```
 POST '/users'
 - Requires A jwt-token ["xx-auth-token" "Header"]
 - Returns:{
            "username": "username",
 }
+```
 
-
+```
 GET '/users/quizzes'
 - Fetchs the quizzes of a sepcifec user
 - Requires ["xx-auth-token", "Header"]
@@ -142,7 +146,9 @@ GET '/categories'
            ],
            "total_categories": 6
 }
+```
 
+```
 
 GET '/categories/<int:category_id>'
 - Fetches an object contains a Category
@@ -151,7 +157,9 @@ GET '/categories/<int:category_id>'
            "success": true ,
            "category":{"id":1 , "type": "Science", "image_link":"URL"}
 }
+```
 
+```
 
 POST '/categories'
 - Creates a new Category
@@ -170,7 +178,9 @@ POST '/categories'
             }
 }
 
+```
 
+```
 PUT '/categories/<int:category_id>'
 - Updates an existed Category
 - Requiers ["xx-auth-token" "Header"]
@@ -188,7 +198,9 @@ PUT '/categories/<int:category_id>'
             }
 }
 
+```
 
+```
 DETELE '/categories/<int:category_id>'
 - Deletes an existed Category
 - Requiers ["xx-auth-token" "Header"]
@@ -252,7 +264,9 @@ GET '/questions'
   "success": true,
   "total_questions": 19
 }
+```
 
+```
 
 GET '/categories/<int:category_id>/questions'
 - Fetches Questions of the selected category
@@ -304,7 +318,9 @@ GET '/categories/<int:category_id>/questions'
     "success": true,
     "total_questions": 3
 }
+```
 
+```
 
 GET '/questions/<int:question_id>'
 - Fetches the selected Question
@@ -324,7 +340,9 @@ GET '/questions/<int:question_id>'
   },
   "success": true
 }
+```
 
+```
 POST '/questions'
 - Creates a new Question
 - Request Arguments: None
@@ -350,7 +368,9 @@ POST '/questions'
     },
     "success": true
 }
+```
 
+```
 
 PUT '/questions/<int:question_id>'
 - Updates an existed Question
@@ -378,7 +398,9 @@ PUT '/questions/<int:question_id>'
     "success": true
 }
 
+```
 
+```
 DETELE '/questions/<int: question_id>'
 - Deletes an existed Question
 - Request Arguments: category_id // int
